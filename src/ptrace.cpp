@@ -30,6 +30,8 @@ int main(int argc, char** argv)
 	int screenWidth;
 	int screenHeight;
 
+	int normal;
+
 	SDL_Surface* screen;
 
 	pixelTracer* tracer;
@@ -56,6 +58,14 @@ int main(int argc, char** argv)
 		}
 	}
 
+	normal = 0;
+	if(argc > 3)
+	{
+		if(strcmp(argv[3], "-n") == 0)
+		{
+			normal = 1;
+		}
+	}
 	/* seed the random function */
 	srand(time(NULL));
 
@@ -108,7 +118,7 @@ int main(int argc, char** argv)
 		}
 
 		/* steps the tracer on the screen to a new position */
-		result = tracer->cycle(0);
+		result = tracer->cycle(normal);
 
 		/* we have reached an edge */
 		if(result == 1)
